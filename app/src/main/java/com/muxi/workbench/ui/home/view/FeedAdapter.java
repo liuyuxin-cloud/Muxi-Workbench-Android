@@ -26,13 +26,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_NORMAL = 0;
     private static final int TYPE_FOOTER = 1;
 
-    private List<FeedBean.ListDTO> mDataList;
+    private List<FeedBean.DataDTO.ListDTO> mDataList;
     private ItemListener mListener;
     private HomeContract.Presenter mPresenter;
 
     FeedAdapter(FeedBean feedBean, HomeContract.Presenter presenter, ItemListener listener) {
         mPresenter = presenter;
-        mDataList = feedBean.getList();
+        mDataList = feedBean.getData().getList();
         mListener = listener;
     }
 
@@ -54,14 +54,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (getItemViewType(position) == TYPE_FOOTER) return;
 
-        FeedBean.ListDTO mData = mDataList.get(position);
-        FeedBean.ListDTO.UserDTO mUser = mData.getUser();
-        FeedBean.ListDTO.SourceDTO mSource = mData.getSource();
+        FeedBean.DataDTO.ListDTO mData = mDataList.get(position);
+        FeedBean.DataDTO.ListDTO.UserDTO mUser = mData.getUser();
+        FeedBean.DataDTO.ListDTO.SourceDTO mSource = mData.getSource();
         VH vh = (VH) holder;
 
         //设置分割线
-        if (mData.getShowDivider()) vh.mSplitView.setVisibility(View.VISIBLE);
-        else vh.mSplitView.setVisibility(View.GONE);
+     //   if (mData.getShowDivider()) vh.mSplitView.setVisibility(View.VISIBLE);
+     //   else vh.mSplitView.setVisibility(View.GONE);
         vh.mSplitView.setTextDate(mData.getDate());
         vh.mSplitView.setTextSign(mData.getTime());
 
@@ -169,14 +169,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     void replaceData(FeedBean feedBean) {
         mDataList.clear();
-        mDataList = feedBean.getList();
+        mDataList = feedBean.getData().getList();
         notifyDataSetChanged();
     }
 
     void addData(FeedBean feedBean) {
         int start = mDataList.size();
-        mDataList.addAll(feedBean.getList());
-        notifyItemRangeInserted(start, feedBean.getList().size());
+        mDataList.addAll(feedBean.getData().getList());
+        notifyItemRangeInserted(start, feedBean.getData().getList().size());
     }
 
 

@@ -14,7 +14,8 @@ public class RemoteDataSource {
     private static final String token = UserWrapper.getInstance().getToken();
 
     public static void getAllFeedFromRemote(FeedRepository.LoadStatusBeanCallback callback, int limit, int last_id) {
-
+        final int[] lastId = new int[1];
+        final FeedBean[] temp = new FeedBean[1];
         final Disposable[] mDisposable = new Disposable[1];
         NetUtil.getInstance().getApi().getFeed(token, limit, last_id)
                 .subscribeOn(Schedulers.io())
@@ -29,6 +30,7 @@ public class RemoteDataSource {
                     public void onNext(FeedBean feedBean) {
                         Log.e("TAG", "RemoteDataSource onNext");
                         Log.e("TAG", "feedbean" + feedBean.toString());
+                        temp[0] = feedBean;
                         callback.onDataLoaded(feedBean);
                     }
 
@@ -41,11 +43,9 @@ public class RemoteDataSource {
                     @Override
                     public void onComplete() {
                         Log.e("TAG", "RemoteDataSource onComplete");
+                        lastId[0] = temp[0].getData().getList().get(temp[0].getData().getList().size()-1).getId();
                         callback.onComplete();
                     }
                 });
     }
-
-
-
 }

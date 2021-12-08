@@ -70,7 +70,7 @@ public class GetStatusListResponse {
         private String title;
         private String content;
         private int likeCount;
-        private int iflike;
+        private boolean iflike;
         private int commentCount;
 
         public int getSid() {
@@ -137,11 +137,11 @@ public class GetStatusListResponse {
             this.likeCount = likeCount;
         }
 
-        public int isIflike() {
+        public boolean isIflike() {
             return iflike;
         }
 
-        public void setIflike(int iflike) {
+        public void setIflike(boolean iflike) {
             this.iflike = iflike;
         }
 

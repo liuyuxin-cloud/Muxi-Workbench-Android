@@ -73,18 +73,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         Log.e("Fragment left cycle", ":onCreate");
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        Log.e("Fragment left cycle", ":onStart");
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        Log.e("Fragment left cycle", ":onResume");
-//    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -207,7 +195,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void showLoadMoreSign(boolean isSuccess) {
         if (isSuccess) {
-//            Toast.makeText(getContext(), "加载成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "加载成功", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "加载失败", Toast.LENGTH_SHORT).show();
         }

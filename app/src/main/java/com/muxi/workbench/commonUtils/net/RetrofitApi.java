@@ -45,7 +45,7 @@ public interface RetrofitApi {
     Observable<LoginResponse> loginWorkbench(@Body LoginUserBean loginUserBean);
 
     //feed
-    @GET("feed/list/")
+    @GET("feed/list")
     Observable<FeedBean> getFeed(@Header("Authorization") String token, @Query("limit") int limit, @Query("last_id")int last_id);
 
     //status

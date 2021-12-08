@@ -36,8 +36,8 @@ public class ProgressDetailPresenter implements ProgressDetailContract.Presenter
     }
 
     @Override
-    public void setLikeProgress(int iflike) {
-        mProgressDetailRepository.setLikeProgress(mSid, iflike == 1, new ProgressDetailDataSource.SetLikeProgressCallback() {
+    public void setLikeProgress(boolean iflike) {
+        mProgressDetailRepository.setLikeProgress(mSid, iflike, new ProgressDetailDataSource.SetLikeProgressCallback() {
             @Override
             public void onSuccessfulSet() {
                 mProgressDetailView.refreshLike(iflike);
@@ -87,15 +87,15 @@ public class ProgressDetailPresenter implements ProgressDetailContract.Presenter
         mProgressDetailRepository.getProgressDetail(mSid, new ProgressDetailDataSource.LoadProgressCallback() {
             @Override
             public void onSuccessGet(GetAStatusResponse getAStatusResponse) {
-                Progress progress = new Progress(mSid, getAStatusResponse.getUserId(), mAvatar, mUsername,
-                        getAStatusResponse.getTime(), getAStatusResponse.getTitle(), getAStatusResponse.getContent(),
-                        getAStatusResponse.getLiked(), getAStatusResponse.getCommentList().size(), getAStatusResponse.getLikeCount());
-                List<Comment> commentList = new ArrayList<>();
-                for ( int i = 0 ; i < getAStatusResponse.getCommentList().size() ; i++ ) {
-                    GetAStatusResponse.CommentListBean temp = getAStatusResponse.getCommentList().get(i);
-                    commentList.add(new Comment(temp.getCid(), temp.getUsername(), temp.getAvatar(), temp.getTime(), temp.getContent()));
-                }
-                mProgressDetailView.showProgressDetail(progress, commentList, getAStatusResponse.getUsername());
+//                Progress progress = new Progress(mSid, getAStatusResponse.getUserId(), mAvatar, mUsername,
+//                        getAStatusResponse.getTime(), getAStatusResponse.getTitle(), getAStatusResponse.getContent(),
+//                        getAStatusResponse.getLiked(), getAStatusResponse.getCommentList().size(), getAStatusResponse.getLikeCount());
+//                List<Comment> commentList = new ArrayList<>();
+//                for ( int i = 0 ; i < getAStatusResponse.getCommentList().size() ; i++ ) {
+//                    GetAStatusResponse.CommentListBean temp = getAStatusResponse.getCommentList().get(i);
+//                    commentList.add(new Comment(temp.getCid(), temp.getUsername(), temp.getAvatar(), temp.getTime(), temp.getContent()));
+//                }
+//                mProgressDetailView.showProgressDetail(progress, commentList, getAStatusResponse.getUsername());
             }
 
             @Override

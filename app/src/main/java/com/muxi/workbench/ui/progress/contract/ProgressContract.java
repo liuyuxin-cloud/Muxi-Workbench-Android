@@ -17,7 +17,7 @@ public interface ProgressContract {
 
         void showUserInfo(int uid);
 
-        void refreshLikeProgress(int position, int iflike);
+        void refreshLikeProgress(int position, boolean iflike);
 
         void refreshProgress(int position, Progress progress);
 

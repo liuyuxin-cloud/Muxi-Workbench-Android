@@ -74,7 +74,7 @@ public class ProgressDetailListAdapter extends RecyclerView.Adapter<RecyclerView
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         if ( holder instanceof ContentViewHolder ) {
 
@@ -96,7 +96,7 @@ public class ProgressDetailListAdapter extends RecyclerView.Adapter<RecyclerView
                 mholder.mEditIv.setVisibility(View.INVISIBLE);
             }
 
-            if ( mProgress.getIfLike() == 1 ) {
+            if ( mProgress.getIfLike() ) {
                 mholder.mLikeIv.setImageResource(R.drawable.like_red);
             } else {
                 mholder.mLikeIv.setImageResource(R.drawable.like_none);
@@ -206,9 +206,9 @@ public class ProgressDetailListAdapter extends RecyclerView.Adapter<RecyclerView
         else return 1;
     }
 
-    public void refreshProgressLike(int iflike) {
+    public void refreshProgressLike(boolean iflike) {
         mProgress.setIfLike(iflike);
-        if ( iflike == 1 )
+        if ( iflike )
             mProgress.setLikeCount(mProgress.getLikeCount()+1);
         else
             mProgress.setLikeCount(mProgress.getLikeCount()-1);

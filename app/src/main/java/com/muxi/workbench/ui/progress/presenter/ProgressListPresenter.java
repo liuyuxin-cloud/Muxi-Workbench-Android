@@ -132,7 +132,7 @@ public class ProgressListPresenter implements ProgressContract.Presenter {
         mProgressListRepository.ifLikeProgress(sid, true, new ProgressListDataSource.SetLikeProgressCallback() {
             @Override
             public void onSuccessfulSet() {
-                mProgressView.refreshLikeProgress(position, 1);
+                mProgressView.refreshLikeProgress(position, true);
             }
 
             @Override
@@ -147,7 +147,7 @@ public class ProgressListPresenter implements ProgressContract.Presenter {
         mProgressListRepository.ifLikeProgress(sid, false, new ProgressListDataSource.SetLikeProgressCallback() {
             @Override
             public void onSuccessfulSet() {
-                mProgressView.refreshLikeProgress(position, 0);
+                mProgressView.refreshLikeProgress(position, false);
             }
 
             @Override

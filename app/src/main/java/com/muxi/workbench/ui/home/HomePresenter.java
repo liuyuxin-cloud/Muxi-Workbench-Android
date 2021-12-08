@@ -10,7 +10,8 @@ public class HomePresenter implements HomeContract.Presenter {
 
     private FeedRepository mFeedRepository;
     private HomeContract.View mHomeView;
-    private static int curPage = 0;
+    private final int limit = 10;
+    private int last_id = -1;
 
     public HomePresenter(FeedRepository feedRepository, HomeContract.View homeView) {
         mFeedRepository = feedRepository;
@@ -27,7 +28,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void loadAllData(boolean isRefresh) {
-        mFeedRepository.getAllData(10,5, new FeedRepository.LoadStatusBeanCallback() {
+        mFeedRepository.getAllData(limit,last_id, new FeedRepository.LoadStatusBeanCallback() {
             @Override
             public void onDataLoaded(FeedBean mBean) {
                 if (isRefresh)
@@ -44,7 +45,6 @@ public class HomePresenter implements HomeContract.Presenter {
 
             @Override
             public void onComplete() {
-                curPage = 1;
                 mHomeView.setLoadingIndicator(false, true);
             }
         });
@@ -57,7 +57,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void refresh() {
-        mFeedRepository.getAllData(10, 5, new FeedRepository.LoadStatusBeanCallback() {
+        mFeedRepository.getAllData(limit, last_id, new FeedRepository.LoadStatusBeanCallback() {
             @Override
             public void onDataLoaded(FeedBean mBean) {
 
@@ -81,7 +81,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void loadMore() {
-        mFeedRepository.getAllData(10, 5, new FeedRepository.LoadStatusBeanCallback() {
+        mFeedRepository.getAllData(limit, last_id, new FeedRepository.LoadStatusBeanCallback() {
             @Override
             public void onDataLoaded(FeedBean mBean) {
                 addItem(mBean);
@@ -94,7 +94,6 @@ public class HomePresenter implements HomeContract.Presenter {
 
             @Override
             public void onComplete() {
-                curPage++;
                 mHomeView.showLoadMoreSign(true);
             }
         });

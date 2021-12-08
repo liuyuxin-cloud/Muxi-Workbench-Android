@@ -69,7 +69,7 @@ public class ProgressFragment extends Fragment implements ProgressContract.View 
 
         @Override
         public void onLikeClick(Progress likeProgress, int position) {
-            if (likeProgress.getIfLike() == 1)
+            if (likeProgress.getIfLike() )
                 mPresenter.cancelLikeProgress(likeProgress.getSid(), position);
             else
                 mPresenter.likeProgress(likeProgress.getSid(), position);
@@ -243,7 +243,7 @@ public class ProgressFragment extends Fragment implements ProgressContract.View 
     }
 
     @Override
-    public void refreshLikeProgress(int position, int iflike) {
+    public void refreshLikeProgress(int position, boolean iflike) {
         mAdapter.notifyProgressLike(position, iflike);
     }
 

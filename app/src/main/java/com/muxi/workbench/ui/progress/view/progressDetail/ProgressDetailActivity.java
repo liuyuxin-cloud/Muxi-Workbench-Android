@@ -44,10 +44,10 @@ public class ProgressDetailActivity extends AppCompatActivity implements Progres
     ProgressDetailListAdapter.ProgressDetailListener mProgressDetailListener = new ProgressDetailListAdapter.ProgressDetailListener() {
         @Override
         public void onLikeClick() {
-            if ( mProgress.getIfLike() == 1 )
-                mPresenter.setLikeProgress(0);
+            if (mProgress.getIfLike())
+                mPresenter.setLikeProgress(false);
             else
-                mPresenter.setLikeProgress(1);
+                mPresenter.setLikeProgress(true);
         }
 
         @Override
@@ -192,7 +192,7 @@ public class ProgressDetailActivity extends AppCompatActivity implements Progres
     }
 
     @Override
-    public void refreshLike(int iflike) {
+    public void refreshLike(boolean iflike) {
         mAdapter.refreshProgressLike(iflike);
     }
 

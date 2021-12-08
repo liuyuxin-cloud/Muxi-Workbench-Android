@@ -233,7 +233,7 @@ public class ProgressListRemoteAndLocalDataSource implements ProgressListDataSou
     @Override
     public void getProgress(int sid, String avatar, String username, int uid, LoadProgressCallback callback) {
         Progress progress = new Progress();
-        NetUtil.getInstance().getApi().getAStatus( sid)
+        NetUtil.getInstance().getApi().getDetail(token, sid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetAStatusResponse>() {
@@ -243,12 +243,12 @@ public class ProgressListRemoteAndLocalDataSource implements ProgressListDataSou
 
                     @Override
                     public void onNext(GetAStatusResponse getAStatusResponse) {
-                        progress.setIfLike(getAStatusResponse.getIflike());
+                        progress.setIfLike(getAStatusResponse.getLiked());
                         progress.setLikeCount(getAStatusResponse.getLikeCount());
                         progress.setTime(getAStatusResponse.getTime());
                         progress.setSid(getAStatusResponse.getSid());
                         progress.setContent(getAStatusResponse.getContent());
-                        progress.setCommentCount(getAStatusResponse.getCommentList().size());
+                      //  progress.setCommentCount(getAStatusResponse.getCommentList().size());
                         progress.setTitle(getAStatusResponse.getTitle());
                         progress.setAvatar(avatar);
                         progress.setUsername(username);

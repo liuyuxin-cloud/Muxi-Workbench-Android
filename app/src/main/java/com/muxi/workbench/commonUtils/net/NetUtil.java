@@ -27,7 +27,7 @@ public class NetUtil {
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("work.test.muxi-tech.xyz/api/v1")
+                .baseUrl("http://work.test.muxi-tech.xyz/api/v1/")
                 .build()
                 .create(RetrofitApi.class);
     }
@@ -40,7 +40,7 @@ public class NetUtil {
     }
 
     private static class NetUtilHolder {
-        private static NetUtil INSTANCE = new NetUtil();
+        private static final NetUtil INSTANCE = new NetUtil();
 
     }
 

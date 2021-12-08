@@ -103,7 +103,7 @@ public class ProgressListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mholder.contentTv.setText(contentBuffer);
             mholder.avatarSdv.setImageURI(progress.getAvatar());
 
-            if ( progress.getIfLike() == 1 )
+            if ( progress.getIfLike() )
                 mholder.likeIv.setImageResource(R.drawable.like_red);
             else mholder.likeIv.setImageResource(R.drawable.like_none);
 
@@ -198,9 +198,9 @@ public class ProgressListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyItemRangeInserted(last, progresses.size());
     }
 
-    public void notifyProgressLike(int position, int iflike) {
+    public void notifyProgressLike(int position, boolean iflike) {
         ProgressList.get(position).setIfLike(iflike);
-        ProgressList.get(position).setLikeCount(ProgressList.get(position).getLikeCount()+(iflike==1?1:-1));
+        ProgressList.get(position).setLikeCount(ProgressList.get(position).getLikeCount()+(iflike ?1:-1));
         notifyItemChanged(position);
     }
 
