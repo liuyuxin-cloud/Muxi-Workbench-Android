@@ -1,7 +1,10 @@
 package com.muxi.workbench.ui.progress.model;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
 
 public class Progress implements Parcelable {
 
@@ -12,7 +15,7 @@ public class Progress implements Parcelable {
     private String time;
     private String title;
     private String content;
-    private int ifLike;
+    private boolean ifLike;
     private int commentCount;
     private int likeCount;
     private boolean isSticky;
@@ -20,7 +23,7 @@ public class Progress implements Parcelable {
     public Progress() {
     }
 
-    public Progress(int sid, int uid, String avatar, String username, String time, String title, String content, int ifLike, int commentCount, int likeCount) {
+    public Progress(int sid, int uid, String avatar, String username, String time, String title, String content, boolean ifLike, int commentCount, int likeCount) {
         this.sid = sid;
         this.uid = uid;
         this.avatar = avatar;
@@ -48,6 +51,7 @@ public class Progress implements Parcelable {
         this.isSticky = true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public Progress(Parcel parcel) {
         this.sid = parcel.readInt();
         this.uid = parcel.readInt();
@@ -56,7 +60,7 @@ public class Progress implements Parcelable {
         this.time = parcel.readString();
         this.title = parcel.readString();
         this.content = parcel.readString();
-        this.ifLike = parcel.readInt();
+        this.ifLike = parcel.readBoolean();
         this.commentCount = parcel.readInt();
         this.likeCount = parcel.readInt();
         this.isSticky =  parcel.readByte() != 0;
@@ -110,11 +114,11 @@ public class Progress implements Parcelable {
         this.title = title;
     }
 
-    public int getIfLike() {
+    public boolean getIfLike() {
         return ifLike;
     }
 
-    public void setIfLike(int ifLike) {
+    public void setIfLike(boolean ifLike) {
         this.ifLike = ifLike;
     }
 
@@ -155,6 +159,7 @@ public class Progress implements Parcelable {
         return 0;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(sid);
@@ -164,7 +169,7 @@ public class Progress implements Parcelable {
         dest.writeString(time);
         dest.writeString(title);
         dest.writeString(content);
-        dest.writeInt(ifLike);
+        dest.writeBoolean(ifLike);
         dest.writeInt(commentCount);
         dest.writeInt(likeCount);
         dest.writeByte((byte) (isSticky ? 1 : 0));

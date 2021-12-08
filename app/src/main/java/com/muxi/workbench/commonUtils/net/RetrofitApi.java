@@ -44,11 +44,13 @@ public interface RetrofitApi {
     @POST(BASE_URL+LOGIN_URL)
     Observable<LoginResponse> loginWorkbench(@Body LoginUserBean loginUserBean);
 
-    @GET("feed/list/{page}/")
-    Observable<FeedBean> getFeed(@Path("page") int page);
+    //feed
+    @GET("feed/list/")
+    Observable<FeedBean> getFeed(@Header("Authorization") String token, @Query("limit") int limit, @Query("last_id")int last_id);
 
-    @GET("http://work.muxi-tech.xyz/api/v1.0/status/{sid}/")
-    Observable<GetAStatusResponse> getAStatus( @Path("sid") int sid);
+    //status
+    @GET("/status/detail/{id}")
+    Observable<GetAStatusResponse> getDetail( @Header("Authorization") String token,@Path("sid") int sid);
 
     @PUT("http://work.muxi-tech.xyz/api/v1.0/status/{sid}/")
     Observable<Response<Void>> editStatus(@Header ("token") String token, @Path("sid") int sid, @Body StatusBean changeStatusBean);

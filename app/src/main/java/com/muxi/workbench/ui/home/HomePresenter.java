@@ -27,7 +27,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void loadAllData(boolean isRefresh) {
-        mFeedRepository.getAllData(1, new FeedRepository.LoadStatusBeanCallback() {
+        mFeedRepository.getAllData(10,5, new FeedRepository.LoadStatusBeanCallback() {
             @Override
             public void onDataLoaded(FeedBean mBean) {
                 if (isRefresh)
@@ -57,7 +57,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void refresh() {
-        mFeedRepository.getAllData(1, new FeedRepository.LoadStatusBeanCallback() {
+        mFeedRepository.getAllData(10, 5, new FeedRepository.LoadStatusBeanCallback() {
             @Override
             public void onDataLoaded(FeedBean mBean) {
 
@@ -81,7 +81,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void loadMore() {
-        mFeedRepository.getAllData(curPage + 1, new FeedRepository.LoadStatusBeanCallback() {
+        mFeedRepository.getAllData(10, 5, new FeedRepository.LoadStatusBeanCallback() {
             @Override
             public void onDataLoaded(FeedBean mBean) {
                 addItem(mBean);

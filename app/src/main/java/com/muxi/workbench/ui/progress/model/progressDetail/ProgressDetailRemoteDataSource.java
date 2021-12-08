@@ -37,7 +37,7 @@ public class ProgressDetailRemoteDataSource implements ProgressDetailDataSource 
     public void getProgressDetail(int sid, LoadProgressCallback callback) {
 
 
-        NetUtil.getInstance().getApi().getAStatus( sid)
+        NetUtil.getInstance().getApi().getDetail(token, sid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetAStatusResponse>() {

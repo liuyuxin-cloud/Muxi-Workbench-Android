@@ -32,7 +32,7 @@ public final class StickyProgress {
     private final String mContent;
 
     @ColumnInfo(name = "ifLike")
-    private final int mIfLike;
+    private final boolean mIfLike;
 
     @ColumnInfo(name = "commentCount")
     private final int mCommentCount;
@@ -41,7 +41,7 @@ public final class StickyProgress {
     private final int mLikeCount;
 
 
-    public StickyProgress(int sid, int uid, String avatar, String username, String time, String title, String content, int ifLike, int commentCount, int likeCount) {
+    public StickyProgress(int sid, int uid, String avatar, String username, String time, String title, String content, boolean ifLike, int commentCount, int likeCount) {
         this.mSid = sid;
         this.mUid = uid;
         this.mAvatar = avatar;
@@ -89,7 +89,7 @@ public final class StickyProgress {
         return mContent;
     }
 
-    public int getIfLike() {
+    public boolean getIfLike() {
         return mIfLike;
     }
 

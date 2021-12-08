@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,6 +15,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.muxi.workbench.R;
 import com.muxi.workbench.ui.home.HomeContract;
 import com.muxi.workbench.ui.home.model.FeedBean;
+import com.muxi.workbench.ui.progress.model.net.GetAStatusResponse;
+import com.muxi.workbench.ui.progress.model.progressDetail.ProgressDetailDataSource;
+import com.muxi.workbench.ui.progress.model.progressDetail.ProgressDetailRemoteDataSource;
 
 import java.util.List;
 
@@ -22,13 +26,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_NORMAL = 0;
     private static final int TYPE_FOOTER = 1;
 
-    private List<FeedBean.DataListBean> mDataList;
+    private List<FeedBean.ListDTO> mDataList;
     private ItemListener mListener;
     private HomeContract.Presenter mPresenter;
 
     FeedAdapter(FeedBean feedBean, HomeContract.Presenter presenter, ItemListener listener) {
         mPresenter = presenter;
-        mDataList = feedBean.getDataList();
+        mDataList = feedBean.getList();
         mListener = listener;
     }
 
@@ -50,35 +54,50 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (getItemViewType(position) == TYPE_FOOTER) return;
 
-        FeedBean.DataListBean mData = mDataList.get(position);
-        FeedBean.DataListBean.UserBean mUser = mData.getUser();
-        FeedBean.DataListBean.SourceBean mSource = mData.getSource();
+        FeedBean.ListDTO mData = mDataList.get(position);
+        FeedBean.ListDTO.UserDTO mUser = mData.getUser();
+        FeedBean.ListDTO.SourceDTO mSource = mData.getSource();
         VH vh = (VH) holder;
 
         //设置分割线
-        if (mData.isIfsplit()) vh.mSplitView.setVisibility(View.VISIBLE);
+        if (mData.getShowDivider()) vh.mSplitView.setVisibility(View.VISIBLE);
         else vh.mSplitView.setVisibility(View.GONE);
-        vh.mSplitView.setTextDate(mData.getTimeday());
-        vh.mSplitView.setTextSign(mData.getTimehm());
+        vh.mSplitView.setTextDate(mData.getDate());
+        vh.mSplitView.setTextSign(mData.getTime());
 
-        vh.mHeadShot.setImageURI(mUser.getAvatar_url());
+        vh.mHeadShot.setImageURI(mUser.getAvatarUrl());
         vh.mName.setText(mData.getUser().getName());
-        vh.mProjectName.setText(mSource.getObject_name());
-        vh.mTime.setText(mData.getTimehm());
+        vh.mProjectName.setText(mSource.getName());
+        vh.mTime.setText(mData.getTime());
         vh.mStatus.setText(getObjectNameFromId(mData.getAction(),
-                mSource.getKind_id(), mSource.getProject_name()));
+                mSource.getKind(), mSource.getProjectName()));
 
 
         vh.mHeadShot.setOnClickListener(view -> mListener.onNameClick());
         vh.mContent.setOnClickListener(view -> {
-            if (mSource.getKind_id() == 6) {
-                mListener.onClickToFeed(mSource.getObject_id(), mUser.getName(),
-                        mUser.getAvatar_url(), mSource.getObject_name());
-            }
-            Log.e("kind=", String.valueOf(mSource.getKind_id()));
-            if (mSource.getKind_id() == 3) {
 
-                mListener.onCliCkToFile(mSource.getObject_id(), mSource.getObject_name());
+            if (mSource.getKind() == 5) {
+                ProgressDetailRemoteDataSource.getInstance().getProgressDetail(mSource.getId(), new ProgressDetailDataSource.LoadProgressCallback() {
+                    @Override
+                    public void onSuccessGet(GetAStatusResponse getAStatusResponse) {
+                        mListener.onClickToFeed(mSource.getId(), getAStatusResponse.getUserName(),
+                                getAStatusResponse.getAvatar(), mSource.getName());
+                    }
+
+                    @Override
+                    public void onFail() {
+                        Toast.makeText(view.getContext(), "失败了",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            if (mSource.getKind() == 6) {
+                mListener.onClickToFeed(mSource.getId(), mUser.getName(),
+                        mUser.getAvatarUrl(), mSource.getName());
+            }
+            Log.e("kind=", String.valueOf(mSource.getKind()));
+            if (mSource.getKind() == 3) {
+
+                mListener.onCliCkToFile(mSource.getId(), mSource.getName());
             }
         });
     }
@@ -99,8 +118,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case 4:
                 stringBuilder.append("了文件");
                 break;
-            case 5:
-            case 6:
+            case 5://创建
+            case 6://评论
                 stringBuilder.append("了进度");
                 break;
             default:
@@ -150,14 +169,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     void replaceData(FeedBean feedBean) {
         mDataList.clear();
-        mDataList = feedBean.getDataList();
+        mDataList = feedBean.getList();
         notifyDataSetChanged();
     }
 
     void addData(FeedBean feedBean) {
         int start = mDataList.size();
-        mDataList.addAll(feedBean.getDataList());
-        notifyItemRangeInserted(start, feedBean.getDataList().size());
+        mDataList.addAll(feedBean.getList());
+        notifyItemRangeInserted(start, feedBean.getList().size());
     }
 
 

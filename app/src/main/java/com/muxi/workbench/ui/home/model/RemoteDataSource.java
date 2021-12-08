@@ -3,6 +3,7 @@ package com.muxi.workbench.ui.home.model;
 import android.util.Log;
 
 import com.muxi.workbench.commonUtils.net.NetUtil;
+import com.muxi.workbench.ui.login.model.UserWrapper;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -10,11 +11,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class RemoteDataSource {
+    private static final String token = UserWrapper.getInstance().getToken();
 
-    public static void getAllFeedFromRemote(FeedRepository.LoadStatusBeanCallback callback, int page) {
+    public static void getAllFeedFromRemote(FeedRepository.LoadStatusBeanCallback callback, int limit, int last_id) {
 
         final Disposable[] mDisposable = new Disposable[1];
-        NetUtil.getInstance().getApi().getFeed(page)
+        NetUtil.getInstance().getApi().getFeed(token, limit, last_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FeedBean>() {
@@ -43,5 +45,7 @@ public class RemoteDataSource {
                     }
                 });
     }
+
+
 
 }

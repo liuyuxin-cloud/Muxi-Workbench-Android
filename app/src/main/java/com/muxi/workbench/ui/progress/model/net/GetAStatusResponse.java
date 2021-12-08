@@ -1,55 +1,22 @@
 package com.muxi.workbench.ui.progress.model.net;
 
-import java.util.List;
-
 public class GetAStatusResponse {
-
-    /**
-     * sid : 0
-     * title : string
-     * author_id : 0
-     * content : string
-     * time : string
-     * likeCount : 0
-     * iflike : true
-     * userID : 0
-     * username : string
-     * commentList : [{"cid":0,"username":"string","avatar":"string","time":"string","content":"string"}]
-     */
-
-    private int sid;
-    private String title;
-    private int author_id;
+    private String avatar;
     private String content;
+    private Integer likeCount;
+    private Boolean liked;
+    private Integer sid;
     private String time;
-    private int likeCount;
-    private int iflike;
-    private int userID;
-    private String username;
-    private List<CommentListBean> commentList;
+    private String title;
+    private Integer userId;
+    private String userName;
 
-    public int getSid() {
-        return sid;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getAuthor_id() {
-        return author_id;
-    }
-
-    public void setAuthor_id(int author_id) {
-        this.author_id = author_id;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getContent() {
@@ -60,6 +27,30 @@ public class GetAStatusResponse {
         this.content = content;
     }
 
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public Boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Boolean liked) {
+        this.liked = liked;
+    }
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
     public String getTime() {
         return time;
     }
@@ -68,99 +59,188 @@ public class GetAStatusResponse {
         this.time = time;
     }
 
-    public int getLikeCount() {
-        return likeCount;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getIflike() {
-        return iflike;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setIflike(int iflike) {
-        this.iflike = iflike;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public int getUserID() {
-        return userID;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<CommentListBean> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<CommentListBean> commentList) {
-        this.commentList = commentList;
-    }
-
-    public static class CommentListBean {
-        /**
-         * cid : 0
-         * username : string
-         * avatar : string
-         * time : string
-         * content : string
-         */
-
-        private int cid;
-        private String username;
-        private String avatar;
-        private String time;
-        private String content;
-
-        public int getCid() {
-            return cid;
-        }
-
-        public void setCid(int cid) {
-            this.cid = cid;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getAvatar() {
-            return avatar;
-        }
-
-        public void setAvatar(String avatar) {
-            this.avatar = avatar;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
+
+//    /**
+//     * sid : 0
+//     * title : string
+//     * author_id : 0
+//     * content : string
+//     * time : string
+//     * likeCount : 0
+//     * iflike : true
+//     * userID : 0
+//     * username : string
+//     * commentList : [{"cid":0,"username":"string","avatar":"string","time":"string","content":"string"}]
+//     */
+//
+//    private int sid;
+//    private String title;
+//    private int author_id;
+//    private String content;
+//    private String time;
+//    private int likeCount;
+//    private int iflike;
+//    private int userID;
+//    private String username;
+//    private List<CommentListBean> commentList;
+//
+//    public int getSid() {
+//        return sid;
+//    }
+//
+//    public void setSid(int sid) {
+//        this.sid = sid;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public int getAuthor_id() {
+//        return author_id;
+//    }
+//
+//    public void setAuthor_id(int author_id) {
+//        this.author_id = author_id;
+//    }
+//
+//    public String getContent() {
+//        return content;
+//    }
+//
+//    public void setContent(String content) {
+//        this.content = content;
+//    }
+//
+//    public String getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
+//
+//    public int getLikeCount() {
+//        return likeCount;
+//    }
+//
+//    public void setLikeCount(int likeCount) {
+//        this.likeCount = likeCount;
+//    }
+//
+//    public int getIflike() {
+//        return iflike;
+//    }
+//
+//    public void setIflike(int iflike) {
+//        this.iflike = iflike;
+//    }
+//
+//    public int getUserID() {
+//        return userID;
+//    }
+//
+//    public void setUserID(int userID) {
+//        this.userID = userID;
+//    }
+//
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public List<CommentListBean> getCommentList() {
+//        return commentList;
+//    }
+//
+//    public void setCommentList(List<CommentListBean> commentList) {
+//        this.commentList = commentList;
+//    }
+//
+//    public static class CommentListBean {
+//        /**
+//         * cid : 0
+//         * username : string
+//         * avatar : string
+//         * time : string
+//         * content : string
+//         */
+//
+//        private int cid;
+//        private String username;
+//        private String avatar;
+//        private String time;
+//        private String content;
+//
+//        public int getCid() {
+//            return cid;
+//        }
+//
+//        public void setCid(int cid) {
+//            this.cid = cid;
+//        }
+//
+//        public String getUsername() {
+//            return username;
+//        }
+//
+//        public void setUsername(String username) {
+//            this.username = username;
+//        }
+//
+//        public String getAvatar() {
+//            return avatar;
+//        }
+//
+//        public void setAvatar(String avatar) {
+//            this.avatar = avatar;
+//        }
+//
+//        public String getTime() {
+//            return time;
+//        }
+//
+//        public void setTime(String time) {
+//            this.time = time;
+//        }
+//
+//        public String getContent() {
+//            return content;
+//        }
+//
+//        public void setContent(String content) {
+//            this.content = content;
+//        }
+//    }
+

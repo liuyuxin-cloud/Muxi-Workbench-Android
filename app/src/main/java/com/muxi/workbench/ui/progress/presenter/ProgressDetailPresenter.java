@@ -87,9 +87,9 @@ public class ProgressDetailPresenter implements ProgressDetailContract.Presenter
         mProgressDetailRepository.getProgressDetail(mSid, new ProgressDetailDataSource.LoadProgressCallback() {
             @Override
             public void onSuccessGet(GetAStatusResponse getAStatusResponse) {
-                Progress progress = new Progress(mSid, getAStatusResponse.getAuthor_id(), mAvatar, mUsername,
+                Progress progress = new Progress(mSid, getAStatusResponse.getUserId(), mAvatar, mUsername,
                         getAStatusResponse.getTime(), getAStatusResponse.getTitle(), getAStatusResponse.getContent(),
-                        getAStatusResponse.getIflike(), getAStatusResponse.getCommentList().size(), getAStatusResponse.getLikeCount());
+                        getAStatusResponse.getLiked(), getAStatusResponse.getCommentList().size(), getAStatusResponse.getLikeCount());
                 List<Comment> commentList = new ArrayList<>();
                 for ( int i = 0 ; i < getAStatusResponse.getCommentList().size() ; i++ ) {
                     GetAStatusResponse.CommentListBean temp = getAStatusResponse.getCommentList().get(i);
